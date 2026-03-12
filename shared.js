@@ -100,7 +100,7 @@ function toggleTheme() {
   localStorage.setItem('g6-theme', light ? 'light' : 'dark');
 }
 function loadTheme() {
-  if (localStorage.getItem('g6-theme') === 'light') document.body.classList.add('light');
+  if (localStorage.getItem('g6-theme') !== 'dark')  // Default to light mode document.body.classList.add('light');
   const btn = document.getElementById('themeBtn');
   if (btn) btn.innerHTML = document.body.classList.contains('light') ? '🌙 Dark' : '☀️ Light';
 }
