@@ -66,7 +66,7 @@ function toggleTeacherUnlock() {
 
       });
 
-      alert('"' Teacher unlock deactivated.');
+      alert('Teacher unlock deactivated.');
 
     }
 
@@ -74,7 +74,7 @@ function toggleTeacherUnlock() {
 
   }
 
-  const code = prompt('" Enter teacher access code:');
+  const code = prompt('Enter teacher access code:');
 
   if (!code) return;
 
@@ -84,11 +84,11 @@ function toggleTeacherUnlock() {
 
     applyTeacherUnlock();
 
-    alert('"" Teacher unlock activated! All lessons and quizzes are now accessible.');
+    alert('Teacher unlock activated! All lessons and quizzes are now accessible.');
 
   } else {
 
-    alert(' Invalid code.');
+    alert('Invalid code.');
 
   }
 
@@ -122,7 +122,7 @@ function applyTeacherUnlock() {
 
     if (!msg.textContent.includes('All activities complete')) {
 
-      msg.innerHTML = '"" Teacher unlock active " quiz available.';
+      msg.innerHTML = 'Teacher unlock active - quiz available.';
 
       msg.style.color = 'var(--accent)';
 
@@ -142,9 +142,9 @@ function showUnlockBadge() {
 
   badge.id = 'teacherUnlockBadge';
 
-  badge.title = 'Teacher Unlock Active " Click to deactivate';
+  badge.title = 'Teacher Unlock Active - Click to deactivate';
 
-  badge.textContent = '""';
+  badge.textContent = 'T';
 
   badge.onclick = toggleTeacherUnlock;
 
@@ -194,20 +194,17 @@ function toggleTheme() {
 
   const btn = document.getElementById('themeBtn');
 
-  if (btn) btn.innerHTML = light ? ' Dark' : ' Light';
+  if (btn) btn.innerHTML = light ? 'Dark' : 'Light';
 
   localStorage.setItem('g6-theme', light ? 'light' : 'dark');
 
 }
 
 function loadTheme() {
-
-  if (localStorage.getItem('g6-theme') !== 'dark')  // Default to light mode document.body.classList.add('light');
-
+  // Default to light mode
+  if (localStorage.getItem('g6-theme') !== 'dark') document.body.classList.add('light');
   const btn = document.getElementById('themeBtn');
-
-  if (btn) btn.innerHTML = document.body.classList.contains('light') ? ' Dark' : ' Light';
-
+  if (btn) btn.innerHTML = document.body.classList.contains('light') ? 'Dark' : 'Light';
 }
 
 
@@ -286,7 +283,7 @@ function checkSignIn() {
 
     if (display) {
 
-      display.innerHTML = '' ' + name + ' <a href="#" onclick="event.preventDefault();studentSignOut()" title="Sign out" style="color:var(--text3);text-decoration:none;margin-left:6px;font-size:.75rem;opacity:.7">-</a>';
+      display.innerHTML = name + ' <a href="#" onclick="event.preventDefault();studentSignOut()" title="Sign out" style="color:var(--text3);text-decoration:none;margin-left:6px;font-size:.75rem;opacity:.7">x</a>';
 
     }
 
@@ -510,7 +507,7 @@ function renderAQ(qid) {
 
   const pct = Math.round(s.currentQ / s.total * 100);
 
-  area.innerHTML = `<div class="quiz-view active"><div class="quiz-progress"><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div><div class="quiz-progress-text">Question ${s.currentQ + 1} of ${s.total}</div></div><div class="quiz-question-wrap"><div class="question-card"><div class="q-outcome">${q.outcome}</div><div class="q-text">${q.q}</div><div class="options">${q.opts.map((o, j) => `<button class="option-btn" onclick="pickAns('${qid}',${j})"><span class="option-letter">${letters[j]}</span>${o}</button>`).join('')}</div><div class="feedback-box" id="${qid}-fb"></div><div class="quiz-nav"><button class="quiz-next-btn" id="${qid}-next" onclick="nextQ('${qid}')">Next '</button></div></div></div></div>`;
+  area.innerHTML = `<div class="quiz-view active"><div class="quiz-progress"><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div><div class="quiz-progress-text">Question ${s.currentQ + 1} of ${s.total}</div></div><div class="quiz-question-wrap"><div class="question-card"><div class="q-outcome">${q.outcome}</div><div class="q-text">${q.q}</div><div class="options">${q.opts.map((o, j) => `<button class="option-btn" onclick="pickAns('${qid}',${j})"><span class="option-letter">${letters[j]}</span>${o}</button>`).join('')}</div><div class="feedback-box" id="${qid}-fb"></div><div class="quiz-nav"><button class="quiz-next-btn" id="${qid}-next" onclick="nextQ('${qid}')">Next</button></div></div></div></div>`;
 
 }
 
@@ -538,7 +535,7 @@ function pickAns(qid, oi) {
 
     fb.className = 'feedback-box show correct';
 
-    fb.textContent = '... Correct! ' + q.explain;
+    fb.textContent = 'Correct! ' + q.explain;
 
     s.score++; s.answered++;
 
@@ -560,7 +557,7 @@ function pickAns(qid, oi) {
 
         fb.className = 'feedback-box show wrong';
 
-        fb.innerHTML = ' ' + q.explain + '<br><br> <strong>Let\'s try a similar question</strong>';
+        fb.innerHTML = q.explain + '<br><br><strong>Let\'s try a similar question</strong>';
 
         s.questions[s.currentQ] = { ...rep, idx: q.idx, isReplacement: true, strikes: 0 };
 
@@ -580,7 +577,7 @@ function pickAns(qid, oi) {
 
         fb.className = 'feedback-box show wrong';
 
-        fb.innerHTML = ' ' + q.explain + '<br><br>"- <strong>Time for a mini-lesson! Watch a video and answer 3 questions.</strong>';
+        fb.innerHTML = q.explain + '<br><br><strong>Time for a mini-lesson! Watch a video and answer 3 questions.</strong>';
 
         setTimeout(() => { s.inRemediation = true; s.remOutcome = oc; s.remCorrect = 0; pickRemQ(qid); renderAQ(qid); }, 2800);
 
@@ -592,7 +589,7 @@ function pickAns(qid, oi) {
 
     fb.className = 'feedback-box show wrong';
 
-    fb.textContent = ' ' + q.explain;
+    fb.textContent = q.explain;
 
     nb.classList.add('show');
 
@@ -628,7 +625,7 @@ function renderRem(qid) {
 
   if (s.remIdx === 0) {
 
-    area.innerHTML = `<div class="remediation-view active"><div class="remediation-header"><h2>"- Mini-Lesson: ${s.remOutcome}</h2><p>Watch this video, then answer 3 questions correctly to continue.</p></div><div class="glass-card"><div class="video-wrap"><iframe src="${videoSrc}" title="Remediation" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div></div><div style="text-align:center;margin-top:20px"><button class="nav-btn primary" onclick="startRemQ('${qid}')">I've Watched " Start Questions '</button></div></div>`;
+    area.innerHTML = `<div class="remediation-view active"><div class="remediation-header"><h2>Mini-Lesson: ${s.remOutcome}</h2><p>Watch this video, then answer 3 questions correctly to continue.</p></div><div class="glass-card"><div class="video-wrap"><iframe src="${videoSrc}" title="Remediation" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div></div><div style="text-align:center;margin-top:20px"><button class="nav-btn primary" onclick="startRemQ('${qid}')">I have watched - Start Questions</button></div></div>`;
 
     return;
 
@@ -654,7 +651,7 @@ function renderRemQ(qid) {
 
   const area = document.getElementById(qid + '-area'), letters = ['A', 'B', 'C', 'D'];
 
-  area.innerHTML = `<div class="remediation-view active"><div class="remediation-header"><h2>"- Mini-Lesson: ${s.remOutcome}</h2><p>Get all 3 correct to return! (${s.remCorrect}/3)</p></div><div class="question-card"><div class="q-outcome">${s.remOutcome} " Remediation</div><div class="q-text">${q.q}</div><div class="options">${q.opts.map((o, j) => `<button class="option-btn" onclick="pickRemAns('${qid}',${j})"><span class="option-letter">${letters[j]}</span>${o}</button>`).join('')}</div><div class="feedback-box" id="${qid}-rfb"></div><div class="quiz-nav"><button class="quiz-next-btn" id="${qid}-rnxt" onclick="nextRemQ('${qid}')">Next '</button></div></div></div>`;
+  area.innerHTML = `<div class="remediation-view active"><div class="remediation-header"><h2>Mini-Lesson: ${s.remOutcome}</h2><p>Get all 3 correct to return! (${s.remCorrect}/3)</p></div><div class="question-card"><div class="q-outcome">${s.remOutcome} - Remediation</div><div class="q-text">${q.q}</div><div class="options">${q.opts.map((o, j) => `<button class="option-btn" onclick="pickRemAns('${qid}',${j})"><span class="option-letter">${letters[j]}</span>${o}</button>`).join('')}</div><div class="feedback-box" id="${qid}-rfb"></div><div class="quiz-nav"><button class="quiz-next-btn" id="${qid}-rnxt" onclick="nextRemQ('${qid}')">Next</button></div></div></div>`;
 
 }
 
@@ -682,13 +679,13 @@ function pickRemAns(qid, oi) {
 
     fb.className = 'feedback-box show correct';
 
-    fb.textContent = '... ' + q.explain;
+    fb.textContent = 'Correct! ' + q.explain;
 
     s.remCorrect++;
 
     nb.classList.add('show');
 
-    if (s.remCorrect >= 3) nb.textContent = 'Return to Quiz "';
+    if (s.remCorrect >= 3) nb.textContent = 'Return to Quiz';
 
   } else {
 
@@ -698,7 +695,7 @@ function pickRemAns(qid, oi) {
 
     fb.className = 'feedback-box show wrong';
 
-    fb.innerHTML = ' ' + q.explain + '<br><br>" <strong>Let\'s try again from the start</strong>';
+    fb.innerHTML = q.explain + '<br><br><strong>Let\'s try again from the start</strong>';
 
     setTimeout(() => { s.remCorrect = 0; pickRemQ(qid); s.remIdx = 1; renderRemQ(qid); }, 2200);
 
@@ -776,15 +773,15 @@ function showResults(qid) {
 
   if (pass) {
 
-    bh = `<button class="results-btn primary" onclick="goTo('home')">Continue '</button><button class="results-btn" onclick="initQuiz('${qid}', quizState['${qid}'].banks)">" Retake</button>`;
+    bh = `<button class="results-btn primary" onclick="goTo('home')">Continue</button><button class="results-btn" onclick="initQuiz('${qid}', quizState['${qid}'].banks)">Retake</button>`;
 
   } else {
 
-    bh = `<button class="results-btn primary" onclick="goTo('lesson${ln}')">"- Review Lesson</button><button class="results-btn" onclick="initQuiz('${qid}', quizState['${qid}'].banks)">" Retry</button>`;
+    bh = `<button class="results-btn primary" onclick="goTo('lesson${ln}')">Review Lesson</button><button class="results-btn" onclick="initQuiz('${qid}', quizState['${qid}'].banks)">Retry</button>`;
 
   }
 
-  area.innerHTML = `<div class="quiz-results-view active"><div class="score-circle ${pass ? 'pass' : 'fail'}">${pct}%</div><p class="quiz-msg">${pass ? ' Excellent! You\'ve mastered this lesson!' : '"- You need 80% to unlock the next lesson.'}</p><p class="quiz-msg-sub">${s.score}/${s.total} (${pct}%)${pass ? '' : ' " Need ' + Math.ceil(s.total * .8)}</p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">${bh}</div></div>`;
+  area.innerHTML = `<div class="quiz-results-view active"><div class="score-circle ${pass ? 'pass' : 'fail'}">${pct}%</div><p class="quiz-msg">${pass ? 'Excellent! You\'ve mastered this lesson!' : 'You need 80% to unlock the next lesson.'}</p><p class="quiz-msg-sub">${s.score}/${s.total} (${pct}%)${pass ? '' : ' ' Need  + Math.ceil(s.total * .8)}</p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">${bh}</div></div>`;
 
 }
 
@@ -922,7 +919,7 @@ function checkGate(lesson) {
 
     if (msg && allDone) { msg.innerHTML = '... All activities complete! You may now take the quiz.'; msg.style.color = 'var(--accent)'; }
 
-    else if (msg && isTeacherUnlocked()) { msg.innerHTML = '"" Teacher unlock active " quiz available.'; msg.style.color = 'var(--accent)'; }
+    else if (msg && isTeacherUnlocked()) { msg.innerHTML = 'Teacher unlock active - quiz available.'; msg.style.color = 'var(--accent)'; }
 
     // Set localStorage flag so lockMap can unlock the quiz page
 
@@ -1018,7 +1015,7 @@ function revealAnswer(btn) {
 
   const isOpen = panel.classList.toggle('open');
 
-  btn.textContent = isOpen ? ' Hide Answers' : '' Reveal Answers';
+  btn.textContent = isOpen ? 'Hide Answers' : 'Reveal Answers';
 
 }
 
@@ -1144,7 +1141,7 @@ function toggleTTS() {
 
   document.getElementById('ttsMainBtn').classList.add('playing');
 
-  document.getElementById('ttsMainBtn').innerHTML = '"';
+  document.getElementById('ttsMainBtn').innerHTML = 'Stop';
 
   document.querySelector('.tts-toggle-label').textContent = 'Reading';
 
@@ -1278,7 +1275,7 @@ function ttsStop() {
 
   document.getElementById('ttsMainBtn').classList.remove('playing');
 
-  document.getElementById('ttsMainBtn').innerHTML = '"';
+  document.getElementById('ttsMainBtn').innerHTML = 'Read';
 
   document.querySelector('.tts-toggle-label').textContent = 'Read to Me';
 
