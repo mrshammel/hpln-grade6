@@ -88,7 +88,7 @@ function toggleTeacherUnlock() {
 
   } else {
 
-    alert('❌ Invalid code.');
+    alert(' Invalid code.');
 
   }
 
@@ -194,7 +194,7 @@ function toggleTheme() {
 
   const btn = document.getElementById('themeBtn');
 
-  if (btn) btn.innerHTML = light ? '🌙 Dark' : ' Light';
+  if (btn) btn.innerHTML = light ? ' Dark' : ' Light';
 
   localStorage.setItem('g6-theme', light ? 'light' : 'dark');
 
@@ -206,7 +206,7 @@ function loadTheme() {
 
   const btn = document.getElementById('themeBtn');
 
-  if (btn) btn.innerHTML = document.body.classList.contains('light') ? '🌙 Dark' : ' Light';
+  if (btn) btn.innerHTML = document.body.classList.contains('light') ? ' Dark' : ' Light';
 
 }
 
@@ -438,7 +438,7 @@ function renderTeacherDashboard() {
 
   let html = '<table class="grade-table"><thead><tr><th>Student</th><th>Email</th><th>Quiz</th><th>Score</th><th>%</th><th>Passed</th><th>Attempts</th><th>Date</th></tr></thead><tbody>';
 
-  grades.forEach(g => { html += `<tr><td>${g.name}</td><td>${g.email}</td><td>${g.quizId}</td><td>${g.score}/${g.total}</td><td>${g.percentage}%</td><td>${g.passed ? '...' : '❌'}</td><td>${g.attempts}</td><td>${g.timestamp ? g.timestamp.slice(0, 10) : ''}</td></tr>`; });
+  grades.forEach(g => { html += `<tr><td>${g.name}</td><td>${g.email}</td><td>${g.quizId}</td><td>${g.score}/${g.total}</td><td>${g.percentage}%</td><td>${g.passed ? '...' : ''}</td><td>${g.attempts}</td><td>${g.timestamp ? g.timestamp.slice(0, 10) : ''}</td></tr>`; });
 
   html += '</tbody></table>';
 
@@ -560,7 +560,7 @@ function pickAns(qid, oi) {
 
         fb.className = 'feedback-box show wrong';
 
-        fb.innerHTML = '❌ ' + q.explain + '<br><br>⚡ <strong>Let\'s try a similar question</strong>';
+        fb.innerHTML = ' ' + q.explain + '<br><br> <strong>Let\'s try a similar question</strong>';
 
         s.questions[s.currentQ] = { ...rep, idx: q.idx, isReplacement: true, strikes: 0 };
 
@@ -580,7 +580,7 @@ function pickAns(qid, oi) {
 
         fb.className = 'feedback-box show wrong';
 
-        fb.innerHTML = '❌ ' + q.explain + '<br><br>"- <strong>Time for a mini-lesson! Watch a video and answer 3 questions.</strong>';
+        fb.innerHTML = ' ' + q.explain + '<br><br>"- <strong>Time for a mini-lesson! Watch a video and answer 3 questions.</strong>';
 
         setTimeout(() => { s.inRemediation = true; s.remOutcome = oc; s.remCorrect = 0; pickRemQ(qid); renderAQ(qid); }, 2800);
 
@@ -592,7 +592,7 @@ function pickAns(qid, oi) {
 
     fb.className = 'feedback-box show wrong';
 
-    fb.textContent = '❌ ' + q.explain;
+    fb.textContent = ' ' + q.explain;
 
     nb.classList.add('show');
 
@@ -698,7 +698,7 @@ function pickRemAns(qid, oi) {
 
     fb.className = 'feedback-box show wrong';
 
-    fb.innerHTML = '❌ ' + q.explain + '<br><br>" <strong>Let\'s try again from the start</strong>';
+    fb.innerHTML = ' ' + q.explain + '<br><br>" <strong>Let\'s try again from the start</strong>';
 
     setTimeout(() => { s.remCorrect = 0; pickRemQ(qid); s.remIdx = 1; renderRemQ(qid); }, 2200);
 
@@ -784,7 +784,7 @@ function showResults(qid) {
 
   }
 
-  area.innerHTML = `<div class="quiz-results-view active"><div class="score-circle ${pass ? 'pass' : 'fail'}">${pct}%</div><p class="quiz-msg">${pass ? '🎉 Excellent! You\'ve mastered this lesson!' : '"- You need 80% to unlock the next lesson.'}</p><p class="quiz-msg-sub">${s.score}/${s.total} (${pct}%)${pass ? '' : ' " Need ' + Math.ceil(s.total * .8)}</p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">${bh}</div></div>`;
+  area.innerHTML = `<div class="quiz-results-view active"><div class="score-circle ${pass ? 'pass' : 'fail'}">${pct}%</div><p class="quiz-msg">${pass ? ' Excellent! You\'ve mastered this lesson!' : '"- You need 80% to unlock the next lesson.'}</p><p class="quiz-msg-sub">${s.score}/${s.total} (${pct}%)${pass ? '' : ' " Need ' + Math.ceil(s.total * .8)}</p><div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">${bh}</div></div>`;
 
 }
 
@@ -1018,7 +1018,7 @@ function revealAnswer(btn) {
 
   const isOpen = panel.classList.toggle('open');
 
-  btn.textContent = isOpen ? '🙈 Hide Answers' : '' Reveal Answers';
+  btn.textContent = isOpen ? ' Hide Answers' : '' Reveal Answers';
 
 }
 
@@ -1086,13 +1086,13 @@ function initReadToMe() {
 
     <div class="tts-controls" id="ttsControls" style="display:none">
 
-      <button class="tts-btn" onclick="ttsBack()" title="Previous section">⏮</button>
+      <button class="tts-btn" onclick="ttsBack()" title="Previous section"></button>
 
-      <button class="tts-btn" id="ttsPauseBtn" onclick="ttsPause()" title="Pause">⏸</button>
+      <button class="tts-btn" id="ttsPauseBtn" onclick="ttsPause()" title="Pause"></button>
 
       <button class="tts-btn" onclick="ttsForward()" title="Next section">-</button>
 
-      <button class="tts-btn" onclick="ttsStop()" title="Stop" style="color:var(--danger)">⏹</button>
+      <button class="tts-btn" onclick="ttsStop()" title="Stop" style="color:var(--danger)"></button>
 
       <select class="tts-rate" id="ttsRate" onchange="ttsChangeRate(this.value)" title="Reading speed">
 
@@ -1242,7 +1242,7 @@ function ttsPause() {
 
     ttsState.paused = false;
 
-    document.getElementById('ttsPauseBtn').innerHTML = '⏸';
+    document.getElementById('ttsPauseBtn').innerHTML = '';
 
     document.getElementById('ttsPauseBtn').title = 'Pause';
 
@@ -1354,7 +1354,7 @@ function initDrawingCanvas(containerId, opts = {}) {
 
     <div class="tool-card drawing-canvas-wrap">
 
-      <div class="tool-header"><span class="tool-icon">🎨</span> ${title}</div>
+      <div class="tool-header"><span class="tool-icon"></span> ${title}</div>
 
       ${opts.instructions ? `<p class="tool-instructions">${opts.instructions}</p>` : ''}
 
@@ -1384,15 +1384,15 @@ function initDrawingCanvas(containerId, opts = {}) {
 
           </select>
 
-          <button class="tool-btn active" data-tool="pen" title="Pen">✏️ Pen</button>
+          <button class="tool-btn active" data-tool="pen" title="Pen"> Pen</button>
 
-          <button class="tool-btn" data-tool="eraser" title="Eraser">🧹 Eraser</button>
+          <button class="tool-btn" data-tool="eraser" title="Eraser"> Eraser</button>
 
-          <button class="tool-btn" data-tool="undo" title="Undo">↩️</button>
+          <button class="tool-btn" data-tool="undo" title="Undo"></button>
 
-          <button class="tool-btn" data-tool="redo" title="Redo">↪️</button>
+          <button class="tool-btn" data-tool="redo" title="Redo"></button>
 
-          <button class="tool-btn" data-tool="clear" title="Clear">--'️ Clear</button>
+          <button class="tool-btn" data-tool="clear" title="Clear">--' Clear</button>
 
         </div>
 
